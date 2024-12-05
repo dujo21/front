@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../styles/auth.css'; // Importuj auth.css iz novog direktorijuma
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -15,7 +16,6 @@ function Register() {
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
-  // Handler za promene u input poljima
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -23,19 +23,18 @@ function Register() {
     });
   };
 
-  // Funkcija za slanje podataka na backend
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+    
     try {
       const response = await fetch('http://localhost:5000/register', {
-        method: 'POST',  // POST metoda
+        method: 'POST',
         headers: {
-          'Content-Type': 'application/json', // JSON sadržaj
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)  // Slanje podataka
+        body: JSON.stringify(formData)
       });
-  
+
       if (response.ok) {
         const data = await response.json();
         setSuccessMessage('Korisnik je uspešno registrovan!');
@@ -51,9 +50,9 @@ function Register() {
   };
 
   return (
-    <div>
-      <h2>Registracija</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="auth-container">
+      <form className="auth-form" onSubmit={handleSubmit}>
+        <h2>Registracija</h2>
         <div>
           <label>Ime:</label>
           <input
@@ -135,9 +134,9 @@ function Register() {
           />
         </div>
         <button type="submit">Registruj se</button>
+        {error && <p className="error-message">{error}</p>}
+        {successMessage && <p className="success-message">{successMessage}</p>}
       </form>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
     </div>
   );
 }

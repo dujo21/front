@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Register from './components/Register';  // Ako je Register.js u components folderu
+import Register from './components/Register';
+import Login from './components/Login';
 
 
 function App() {
@@ -8,7 +9,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/register" element={<Register />} />
-        {/* Dodaj ostale rute po potrebi */}
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   );
