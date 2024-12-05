@@ -15,6 +15,10 @@ const NavBar = ({ isAuthenticated, onLogout }) => {
         navigate("/register"); // Preusmeravanje na /register
     };
 
+    const handleLoginRedirect = () => {
+      navigate("/login"); // Preusmeravanje na Login stranicu
+  };
+
     return (
         <nav className="navbar">
           <div className="navbar-container">
@@ -31,7 +35,7 @@ const NavBar = ({ isAuthenticated, onLogout }) => {
               ) : (
                 <>
                   <button
-                    onClick={() => setShowLoginModal(true)}
+                    onClick={handleLoginRedirect}
                     className="btn btn-login"
                   >
                     Prijavi se
@@ -42,40 +46,7 @@ const NavBar = ({ isAuthenticated, onLogout }) => {
           </div>
     
           {/* Modal za prijavu */}
-          {showLoginModal && (
-            <div className="modal">
-              <div className="modal-content">
-                <span
-                  className="close"
-                  onClick={() => setShowLoginModal(false)}
-                >
-                  &times;
-                </span>
-                <h2>Prijava</h2>
-                <input type="email" placeholder="Email" id="loginEmail" />
-                <input
-                  type="password"
-                  placeholder="Lozinka"
-                  id="loginPassword"
-                />
-                <button
-                  className="btn btn-submit"
-                  onClick={() => {
-                    // Dodaj logiku prijave
-                    setShowLoginModal(false);
-                  }}
-                >
-                  Prijavi se
-                </button>
-                <button
-                  className="btn btn-secondary"
-                  onClick={handleRegisterRedirect} // Preusmeravanje na stranicu za registraciju
-                >
-                  Registruj se
-                </button>
-              </div>
-            </div>
-          )}
+          
         </nav>
       );
 
